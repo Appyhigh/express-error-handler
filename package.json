@@ -1,0 +1,28 @@
+{
+  "name": "express-error-handler",
+  "version": "1.0.0",
+  "description": "Express error handler for development and production environments.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "api",
+    "express",
+    "error",
+    "handler",
+    "error-handler",
+    "json",
+    "node"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Appyhigh/express-error-handling.git"
+  },
+  "author": "AK",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Appyhigh/express-error-handling/issues"
+  },
+  "homepage": "https://github.com/Appyhigh/express-error-handling#readme"
+}
