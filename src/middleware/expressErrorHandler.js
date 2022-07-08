@@ -1,10 +1,10 @@
 /*
  * express-error-handler
- * Copyright 2022 Appyhigh.
+ * Copyright 2022 Appyhigh
  * Licensed under MIT License
  */
 
-const { httpCode, httpMessage } = require('../constants/http');
+
 const constants = require('../constants');
 const serverError = require('../error/500');
 
@@ -13,12 +13,18 @@ const serverError = require('../error/500');
  * Express error handlers for JSON APIs in development and production environments.
  * @param {Object} [options]
  * @param {String} options.environment - server environment like development or production
- * @param {Boolean} options.errorLogs - if this is true then print all errors at console.
+ * @param {Boolean} options.errorLogs - if this is true then print all errors at console
+ * @param {Boolean} options.trace - if this is true then send error trace in response
+ * @param {Boolean} options.errorDescription - if this is true then send error description in response
+ * @param {Boolean} options.errorOrigin - if this is true then send error origin in response
  * @return {VoidFunction}
  */
 const expressErrorHandler = (options = {}) => {
   const environment = options.environment || constants.DEVELOPMENT;
   const errorLogs = options.errorLogs || false;
+  const trace = options.trace || true;
+  const errorDescription = options.errorDescription || true;
+  const errorOrigin = options.errorOrigin || true;
 
 
   // eslint-disable-next-line no-unused-vars
@@ -48,12 +54,16 @@ const expressErrorHandler = (options = {}) => {
       httpStatusCode = serverError.httpCode;
     }
 
-    if (err.message && err.message !== '') {
-
+    if (!errorDescription) {
+      delete errorObj.errorDescription;
     }
 
-    if (trace) {
+    if (!trace) {
+      delete errorObj.trace;
+    }
 
+    if (!errorOrigin) {
+      delete errorObj.errorOrigin;
     }
 
     //error logs
@@ -62,6 +72,7 @@ const expressErrorHandler = (options = {}) => {
     }
 
     //TODO: send error data to Appyware asynchronously
+    console.log('send error data to Appyware asynchronously')
 
     // Deleting any kind of password/code/token received from the client before logging the request body
     if (request.body) {

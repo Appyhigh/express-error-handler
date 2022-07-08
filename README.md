@@ -11,80 +11,59 @@ $ npm install @appyhigh/express-error-handling --save
   
 ## Use
 
+[Check here for sample application](https://www.npmjs.com/package/express)
 
-In an [express](https://www.npmjs.com/package/express) based application:
+## Methods
+
+### expressErrorHandler(options: Object) => (error, request, response, next)
+
+This is a function which will work as a middleware for your express app so that your errors will response with an HTTP response.
+
+You have to pass options objects as parameters (*options is **optional***).
+
+**Example**
 
 ```js
+const express = require('express');
+const { expressErrorHandler } = require('@appyhigh/express-error-handling');
 
-const  express = require('express');
-const  errorHandler = require('node-error-handler');
-  
-const  app = express();
+const app = express();
 
-// Setup your middlewares
-// Setup your routes
-app.get('/foo', (req, res, next) => {
-  const  error = new  Error('Missing field(s): foo');
-  error.code = 422;
-  next(error);
-});
-
-// HTTP errorHandler
-app.use(errorHandler({ debug: true, trace: true, camel_case: true }));
-
+app.use(expressErrorHandler({
+   environment : 'development',
+   errorLogs : false,
+   trace : true,
+   errorDescription : true,
+   errorOrigin : true
+}));
 ```
-
 
 ## Options
 
   
 | Option | Type | Default | Description  |
 | ------ |------|---------| ------------ |
-| debug | Boolean | `false`| If `true` all errors are printed with stderr. |
-| trace| Boolean | `false` | If `true` the trace is attached to output. |
-| camel_case | Boolean | `false` | If `true` The camelCase approach is used by error handler. |
+| environment | String | `development`| it can be either `development` or `production`. |
+| trace| Boolean | `true` | If `true` the trace is attached to response. |
+| errorLogs | Boolean | `false` | If `true` all errors are printed via `console.error`. |
+| errorDescription | Boolean | `true` | If `true` then error message for developer will be attached to response. |
+| errorOrigin | Boolean | `true` | If `true` then error origin place in your code will be attached to response. |
   
 
 ## Example
 
-5xx error  `camel_case: false`:
-
-```
-{ "error": { "status_code": 500,"code": "INTERNAL_SERVER_ERROR" } }
-```
-
-5xx error  `camel_case: true`:
-
-```
-{ "error": { "statusCode": 500,"code": "INTERNAL_SERVER_ERROR" } }
-```
-
-5xx error  `trace: false`:
-
-```
-{ "error": { "status_code": 500,"code": "INTERNAL_SERVER_ERROR" } }
-```
-
-5xx error  `with transaction_id`:
-
-```
-{ "error": { "status_code": 500,"code": "INTERNAL_SERVER_ERROR", "transaction_id": "7616e2d3-6b90-43ba-8548-f6en12384f39" } }
-```
-
 5xx error  `trace: true`:
 
 ```
-{ "error": 
-  { "status_code": 500,
-    "code": "INTERNAL_SERVER_ERROR",
-    "trace":   
-    at Module._compile (internal/modules/cjs/loader.js:892:18)
-    at Object.Module._extensions..js (internal/modules/cjs/loader.js:973:10)
-    at Module.load (internal/modules/cjs/loader.js:812:32)
-    at Function.Module._load (internal/modules/cjs/loader.js:724:14)
-    at Function.Module.runMain (internal/modules/cjs/loader.js:1025:10)
-    at internal/main/run_main_module.js:17:11 
-    } 
+{
+    "statusCode": 404,
+    "error": {
+        "stack": "Error\n at new AppError (/home/akumar/instore-dev/insta-downloader-backend/lib/errorClasses/appError.js:11:5)\n    at next (/home/akumar/instore-dev/insta-downloader-backend/node_modules/express/lib/router/index.js:260:14)",
+        "errorDescription": "Error info for developer",
+        "type": "Error_origin",
+        "errorUserTitle": "Error title for user",
+        "errorUserMsg": "Error message for user"
+    }
 }
 ```
 
@@ -96,12 +75,12 @@ The error could contain the following fields:
 
 |  Error Key  |  Purpose  |
 | --------- | -------------------------------------------------------------------- |
-| status_code | HTTP status code for response. Default value: `500` (Internal Server Error). |
-| message | Error message. |
-| code | Error code, associated with `status_code`. |
-| trace | Trace including data for dubug such as file, paths. |
-| transaction_id | Unique identifier value that is attached to requests and messages that allow reference to a particular transaction or event chain. |
-
+| stack | Trace including data for dubug such as file, paths. |
+| errorDescription | Error message for developer debug purpose. |
+| type | Error origin means in which module error has occured. |
+| errorUserTitle | Error title for user popup. |
+| errorUserMsg | Error message for user popup. |
+| statusCode | HTTP status code for response. Default value: `500` (Internal Server Error). |
 
 ## License
 
