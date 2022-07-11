@@ -1,4 +1,4 @@
-const { httpCode, AppError, httpMessage } = require('../index');
+const { httpCode, AppError, httpMessage, expressErrorHandler } = require('../index');
 
 console.log('httpCode ', httpCode.ACCEPTED);
 
@@ -12,6 +12,7 @@ const knownError = {
 
 try {
   //do something....
+  console.log('expressErrorHandler() ', expressErrorHandler());
 }
 catch (error) {
   console.log('error ', new AppError(knownError, {}))

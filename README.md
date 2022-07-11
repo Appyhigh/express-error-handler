@@ -5,7 +5,7 @@
 
 
 ```bash
-$ npm install @appyhigh/express-error-handling --save
+$ npm install @appyhigh/express-error-handler --save
 ```
 
   
@@ -202,10 +202,10 @@ The error could contain the following fields:
 | [httpCode.UNSUPPORTED_MEDIA_TYPE] | String | `Unsupported Media Type` |
 | [httpCode.USE_PROXY] | String | `Use Proxy` |
 
-**Example**
+### Example
 
 ```js
-const { AppError, httpCode, httpMessage } = require('@appyhigh/express-error-handling');
+const { AppError, httpCode, httpMessage } = require('@appyhigh/express-error-handler');
 
 const knownError = {
   errorDescription: 'Error description for developer.',
