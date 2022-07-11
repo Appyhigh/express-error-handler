@@ -21,11 +21,11 @@ const serverError = require('../error/500');
  */
 const expressErrorHandler = (options = {}) => {
 
-  const environment = options.environment || constants.DEVELOPMENT;
-  const errorLogs = options.errorLogs || false;
-  const trace = options.trace || true;
-  const errorDescription = options.errorDescription || true;
-  const errorOrigin = options.errorOrigin || true;
+  const environment = options.hasOwnProperty('environment') ? options.environment : constants.DEVELOPMENT;
+  const errorLogs = options.hasOwnProperty('errorLogs') ? options.errorLogs : false;
+  const trace = options.hasOwnProperty('trace') ? options.trace : true;
+  const errorDescription = options.hasOwnProperty('errorDescription') ? options.errorDescription : true;
+  const errorOrigin = options.hasOwnProperty('errorOrigin') ? options.errorOrigin : true;
 
   // eslint-disable-next-line no-unused-vars
   return (error, request, response, next) => {

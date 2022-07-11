@@ -1,6 +1,6 @@
 {
   "name": "@appyhigh/express-error-handler",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Express error handler for development and production environments.",
   "main": "index.js",
   "scripts": {

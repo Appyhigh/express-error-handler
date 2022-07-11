@@ -1,6 +1,6 @@
 const { httpCode, httpMessage } = require('../constants/http');
 
-module.export = {
+module.exports = {
   errorDescription: 'Internal server error',
   type: 'globalError',
   errorUserTitle: '',
