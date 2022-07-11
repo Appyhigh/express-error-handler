@@ -12,7 +12,13 @@ const knownError = {
 
 try {
   //do something....
-  console.log('expressErrorHandler() ', expressErrorHandler());
+  console.log('expressErrorHandler() ', expressErrorHandler({
+    environment: 'development',
+    errorLogs: false,
+    trace: false,
+    errorDescription: true,
+    errorOrigin: true
+  }));
 }
 catch (error) {
   console.log('error ', new AppError(knownError, {}))

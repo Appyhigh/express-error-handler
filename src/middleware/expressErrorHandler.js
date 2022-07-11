@@ -20,12 +20,12 @@ const serverError = require('../error/500');
  * @return {VoidFunction}
  */
 const expressErrorHandler = (options = {}) => {
+
   const environment = options.environment || constants.DEVELOPMENT;
   const errorLogs = options.errorLogs || false;
   const trace = options.trace || true;
   const errorDescription = options.errorDescription || true;
   const errorOrigin = options.errorOrigin || true;
-
 
   // eslint-disable-next-line no-unused-vars
   return (error, request, response, next) => {
@@ -59,16 +59,16 @@ const expressErrorHandler = (options = {}) => {
     }
 
     if (!trace) {
-      delete errorObj.trace;
+      delete errorObj.stack;
     }
 
     if (!errorOrigin) {
-      delete errorObj.errorOrigin;
+      delete errorObj.type;
     }
 
     //error logs
     if (errorLogs && environment === constants.DEVELOPMENT) {
-      console.error(errorHandler);
+      console.error(errorObj);
     }
 
     //TODO: send error data to Appyware asynchronously
