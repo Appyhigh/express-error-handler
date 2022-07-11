@@ -1,26 +1,21 @@
-const { httpCode, AppError, httpMessage, expressErrorHandler } = require('../index');
+const express = require('express')
+const asyncExecute = require('./middleware/asyncExecute');
+const { expressErrorHandler } = require('@appyhigh/express-error-handler');
+const controller = require('./controller/testing');
+const app = express()
+const port = 3322
 
-console.log('httpCode ', httpCode.ACCEPTED);
+app.get('/', asyncExecute(controller.testing))
 
-const knownError = {
-  errorDescription: 'Error description for developer.',
-  type: 'error origin place or module name',
-  errorUserTitle: 'Error title for user',
-  errorUserMsg: httpMessage[httpCode.INTERNAL_SERVER_ERROR],
-  httpCode: httpCode.INTERNAL_SERVER_ERROR
-};
+//express error handler configuration
+app.use(expressErrorHandler({
+  environment: process.env.ENV === 'development' ? 'development' : 'production',
+  errorLogs: process.env.ENV === 'development' ? ture : false,
+  trace: process.env.ENV === 'development' ? true : false,
+  errorDescription: process.env.ENV === 'development' ? true : false,
+  errorOrigin: process.env.ENV === 'development' ? true : false,
+}));
 
-try {
-  //do something....
-  console.log('expressErrorHandler() ', expressErrorHandler({
-    environment: 'development',
-    errorLogs: false,
-    trace: false,
-    errorDescription: true,
-    errorOrigin: true
-  }));
-}
-catch (error) {
-  console.log('error ', new AppError(knownError, {}))
-}
-console.log('error ', new AppError(knownError, {}))
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})

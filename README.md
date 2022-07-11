@@ -25,7 +25,7 @@ You have to pass options objects as parameters (*options is **optional***).
 
 ```js
 const express = require('express');
-const { expressErrorHandler } = require('@appyhigh/express-error-handling');
+const { expressErrorHandler } = require('@appyhigh/express-error-handler');
 
 const app = express();
 
