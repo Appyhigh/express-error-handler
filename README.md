@@ -18,6 +18,7 @@ $ npm install @appyhigh/express-error-handler --save
 ### expressErrorHandler(options: Object) => (error, request, response, next)
 
 This is a function which will work as a middleware for your express app so that your errors will response with an HTTP response.
+if you will pass database URL then your errors will be saved in database for future analytics.
 
 You have to pass options objects as parameters (*options is **optional***).
 
@@ -31,6 +32,9 @@ const app = express();
 
 app.use(expressErrorHandler({
    environment : 'development',
+   dbUrl: 'mongodb+srv://<username>:<password>@clustername.mongodb.net/test?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true',
+   dbName: 'test-1',
+   appName: 'testing-1',
    errorLogs : false,
    trace : true,
    errorDescription : true,
@@ -48,7 +52,10 @@ app.use(expressErrorHandler({
 | errorLogs | Boolean | `false` | If `true` all errors are printed via `console.error`. |
 | errorDescription | Boolean | `true` | If `true` then error message for developer will be attached to response. |
 | errorOrigin | Boolean | `true` | If `true` then error origin place in your code will be attached to response. |
-  
+| dbUrl | String | `` | If database string given then errors will be save in database. |
+| dbName | String | `errorApp` | Save the errors in given database name. |
+| appName | String | `errorApp` | This property will help to group the errors application wise in database collection. |
+
 
 ## Example
 

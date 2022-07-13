@@ -14,6 +14,9 @@ app.use(expressErrorHandler({
   trace: process.env.ENV === 'development' ? true : false,
   errorDescription: process.env.ENV === 'development' ? true : false,
   errorOrigin: process.env.ENV === 'development' ? true : false,
+  dbUrl: 'mongodb+srv://<username>:<password>@clustername.mongodb.net/test?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true',
+  dbName: 'test-1',
+  appName: 'testing-1'
 }));
 
 app.listen(port, () => {
