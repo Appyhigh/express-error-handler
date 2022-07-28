@@ -13,6 +13,7 @@ module.exports = async (MongoUrl, dbName, errorObj) => {
     const col = db.collection("errors");
 
     // Insert a single document, wait for promise so we can read it back
+    errorObj.createdAt = new Date();
     const p = await col.insertOne(errorObj);
     // console.log(p);
 

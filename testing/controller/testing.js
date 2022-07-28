@@ -11,10 +11,10 @@ const testing = async (request, response) => {
   */
 
   //test case 1
-  // if (!userData) {
-  //   let options = {}//you can pass any data related to known error like 3rd party response error. it is optional.
-  //   throw new AppError(error.knownError, options);
-  // }
+  if (!userData) {
+    let options = {}//you can pass any data related to known error like 3rd party response error. it is optional.
+    throw new AppError(error.knownError, options);
+  }
 
   //test case 2
   // console.log('test ', test);// unknown error handling
