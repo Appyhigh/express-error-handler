@@ -11,22 +11,22 @@ const testing = async (request, response) => {
   */
 
   //test case 1
-  if (!userData) {
-    let options = {}//you can pass any data related to known error like 3rd party response error. it is optional.
-    throw new AppError(error.knownError, options);
-  }
+  // if (!userData) {
+  //   let options = {}//you can pass any data related to known error like 3rd party response error. it is optional.
+  //   throw new AppError(error.knownError, options);
+  // }
 
   //test case 2
-  // console.log('test ', test);// unknown error handling
+  //console.log('test ', test);// unknown error handling
 
   //test case 3
-  // try {
-  //   //we have made a request for 3rd party API
-  //   let data = await axios.get('https://testing.com');
-  // }
-  // catch (e) {
-  //   throw new AppError(error.knownError, { error: e });
-  // }
+  try {
+    //we have made a request for 3rd party API
+    let data = await axios.get('https://testing.com');
+  }
+  catch (e) {
+    throw new AppError(error.knownError, { error: e });
+  }
 
   response.status(200).send('Ok');
 };
