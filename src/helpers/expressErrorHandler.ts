@@ -4,12 +4,12 @@
  * Licensed under MIT License
  */
 
-import save from 'dbConnection/mongodb';
+import save from '../dbConnection/mongodb';
 import { ErrorRequestHandler } from 'express';
-import DATABASES from 'utils/DATABASES';
-import DEFAULT_ERROR from 'utils/DEFAULT_ERROR';
-import defaultOptions, { Options } from 'utils/DEFAULT_OPTIONS';
-import ENVIRONMENTS from 'utils/ENVIRONMENTS';
+import DATABASES from '../utils/DATABASES';
+import DEFAULT_ERROR from '../utils/DEFAULT_ERROR';
+import defaultOptions, { Options } from '../utils/DEFAULT_OPTIONS';
+import ENVIRONMENTS from '../utils/ENVIRONMENTS';
 
 const expressErrorHandler = (options: Options) => {
   const allOptions: Options = {
