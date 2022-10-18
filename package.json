@@ -1,6 +1,7 @@
 {
   "name": "@appyhigh/express-error-handle",
   "version": "2.0.0-beta0",
+  "private": false,
   "description": "Express error handler for development and production environments.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
