@@ -17,7 +17,7 @@ const expressErrorHandler = (options: Options) => {
     ...options,
   };
 
-  const errorHandler: ErrorRequestHandler = (error, request, response) => {
+  const errorHandler: ErrorRequestHandler = (error, request, response, _next) => {
     let errorObj;
     let httpStatusCode;
 
