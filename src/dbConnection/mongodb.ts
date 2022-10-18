@@ -12,8 +12,7 @@ const save = async (MongoUrl: string, dbName: string, errorObj: object & { creat
 
     // Insert a single document, wait for promise so we can read it back
     errorObj.createdAt = new Date();
-    const p = await col.insertOne(errorObj);
-    console.log(p);
+    await col.insertOne(errorObj);
   } catch (err) {
     console.error('[Express-error-handler DB connection error] : ', err);
   } finally {
