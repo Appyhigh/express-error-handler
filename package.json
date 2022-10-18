@@ -1,10 +1,24 @@
 {
-  "name": "@appyhigh/express-error-handler",
-  "version": "1.0.6",
+  "name": "@appyhigh/express-error-handle",
+  "version": "2.0.0-beta0",
   "description": "Express error handler for development and production environments.",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.(js|ts)\"",
+    "lint": "eslint src --ext .js,.ts",
+    "lint:fix": "eslint src --fix --ext .js,.ts",
+    "test": "jest --config jest.config.js --passWithNoTests",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Appyhigh/express-error-handling.git"
   },
   "keywords": [
     "api",
@@ -15,18 +29,29 @@
     "json",
     "node"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Appyhigh/express-error-handling.git"
-  },
-  "author": "AK",
+  "author": "Rhythm Bhiwani",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Appyhigh/express-error-handling/issues"
   },
   "homepage": "https://github.com/Appyhigh/express-error-handling#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.14",
+    "@types/jest": "29.0.3",
+    "@typescript-eslint/eslint-plugin": "5.38.0",
+    "@typescript-eslint/parser": "5.38.0",
+    "eslint": "8.23.1",
+    "eslint-plugin-jest": "27.0.4",
+    "jest": "29.0.3",
+    "prettier": "2.7.1",
+    "ts-jest": "29.0.1",
+    "typescript": "4.8.3"
+  },
+  "files": [
+    "dist/**/*"
+  ],
   "dependencies": {
-    "express": "^4.18.1",
-    "mongodb": "^4.7.0"
+    "express": "4.18.2",
+    "mongodb": "4.10.0"
   }
 }
