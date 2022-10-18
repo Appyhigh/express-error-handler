@@ -1,5 +1,5 @@
 {
-  "name": "@appyhigh/express-error-handle",
+  "name": "@appyhigh/express-error-handler",
   "version": "2.0.0-beta0",
   "private": false,
   "description": "Express error handler for development and production environments.",
