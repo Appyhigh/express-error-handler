@@ -1,4 +1,4 @@
-const ERROR_CODES_AND_MESSAGES = {
+const RESPONSE_CODES_AND_MESSAGES = {
   ACCEPTED: { message: 'Accepted', code: 202 },
   BAD_GATEWAY: { message: 'Bad Gateway', code: 502 },
   BAD_REQUEST: { message: 'Bad Request', code: 400 },
@@ -55,4 +55,4 @@ const ERROR_CODES_AND_MESSAGES = {
   USE_PROXY: { message: 'Use Proxy', code: 305 },
 };
 
-export default ERROR_CODES_AND_MESSAGES;
+export default RESPONSE_CODES_AND_MESSAGES;
